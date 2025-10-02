@@ -19,10 +19,20 @@ if st.button("810"):
 # フォーム
 name = st.text_input("あなたの名前は？")
 age = st.text_input("あなたの年齢は？")
-jobs = ["学生", "会社員", "自営業", "その他"]
+job = st.selectbox("あなたの職業は？", ["選んでください", "学生", "会社員", "自営業", "その他"])
 
+# 送信ボタン
 if st.button("送信"):
-    if not name or not age:   # どちらか空ならエラー
+    if not name or not age or job == "選んでください":
         st.error("すべての項目を入力してください！")
     else:
-        st.write(f"{name}さん、こんにちは！ 君は{age}歳なんだね！{' まだ若いね！' if int(age) < 20 else ' 大人だね！'}職業は{jobs[0]}なんだね！")
+        # 年齢は数字だけのときだけ評価
+        if age.isdigit():
+            age_int = int(age)
+            st.write(
+                f"{name}さん、こんにちは！ 君は{age_int}歳なんだね！"
+                f"{' まだ若いね！' if age_int < 20 else ' 大人だね！'} "
+                f"職業は {job} なんだね！"
+            )
+        else:
+            st.error("年齢は数字で入力してください！")

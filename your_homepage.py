@@ -50,3 +50,4 @@ if st.button("送信"):
             f"君は{age_int}歳で {age_msg}\n"
             f"職業は {job} で、趣味は {hobby} なんだね！"
         )
+;

@@ -17,5 +17,6 @@ if st.button("810"):
    st.write("淫夢厨なんですか？")
 # フォーム
 name = st.text_input("あなたの名前は？")
+age = st.text_input("あなたの年齢は？")
 if st.button("送信"):
-    st.write(f"{name}さん、こんにちは！") # https://python-ddvmuygaameabr7brnygeh.streamlit.app/
+    st.write(f"{name}さん、こんにちは！ 君は{age}歳なんだね！") # https://python-ddvmuygaameabr7brnygeh.streamlit.app/

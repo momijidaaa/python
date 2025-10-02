@@ -14,4 +14,4 @@ if st.button("押してみて"):
 # フォーム
 name = st.text_input("あなたの名前は？")
 if st.button("送信"):
-    st.write(f"{name}さん、こんにちは！")
+    st.write(f"{name}さん、こんにちは！") # https://python-ddvmuygaameabr7brnygeh.streamlit.app/

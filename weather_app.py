@@ -3,7 +3,7 @@ import requests
 
 st.title("大阪の天気")
 
-api_key = "YOUR_API_KEY"
+api_key = "0d7002e49da20fd09d9deb50df3f9211"
 city = "Osaka"
 
 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ja"

@@ -42,11 +42,11 @@ if st.button("送信"):
         elif age_int < 20:
             age_msg = "高校生だね！"
         elif age_int < 30:
-            age_msg = "おばだね！"
+            age_msg = "大人だね！"
         elif age_int < 40:
             age_msg = "ばばぁだね！"
         else:
-            age_msg = "大人だね！"
+            age_msg = "老害じゃん！"
         
         # 最終メッセージ表示
         st.success(

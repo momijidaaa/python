@@ -5,11 +5,6 @@ st.header("ようこそ！")
 st.write("ここはPythonだけで作ったホームページです。")
 st.write("ぜひ、いろいろなボタンを押してみてね！")
 
-# 画像を表示
-st.image(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXADv4Mi32xRaj4KmDgrup4ZVxqk2JiBw_vA&s",
-    caption="かわいいかろん"
-)
 
 # ボタン
 if st.button("押してみて"):

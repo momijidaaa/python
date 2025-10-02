@@ -19,9 +19,10 @@ if st.button("810"):
 # フォーム
 name = st.text_input("あなたの名前は？")
 age = st.text_input("あなたの年齢は？")
+jobs = ["学生", "会社員", "自営業", "その他"]
 
 if st.button("送信"):
     if not name or not age:   # どちらか空ならエラー
         st.error("すべての項目を入力してください！")
     else:
-        st.write(f"{name}さん、こんにちは！ 君は{age}歳なんだね！")
+        st.write(f"{name}さん、こんにちは！ 君は{age}歳なんだね！{' まだ若いね！' if int(age) < 20 else ' 大人だね！'}職業は{jobs[0]}なんだね！")

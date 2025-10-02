@@ -9,9 +9,9 @@ st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXADv4Mi32xRaj4K
 
 # ボタン
 if st.button("押してみて"):
-    st.write("こんにちは！ボタンを押してくれてありがとう！")
+   st.write("こんにちは！ボタンを押してくれてありがとう！")
 if st.button("押さないで"):
-if st.wirite("なんで押したの？")
+   st.wirite("なんで押したの？")
 # フォーム
 name = st.text_input("あなたの名前は？")
 if st.button("送信"):

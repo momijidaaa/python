@@ -14,7 +14,7 @@ if st.button("押さないで"):
 if st.button("810"):
     st.write("淫夢厨なんですか？")
 if st.button("押せよ"):
-   st.wirte("おめでとう！君は今日からアンパンマンだ！")
+   st.write("おめでとう！！今日からきみがアンパンマンだ")
 # フォーム入力
 name = st.text_input("あなたの名前は？")
 age = st.text_input("あなたの年齢は？")

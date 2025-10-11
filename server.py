@@ -9,41 +9,26 @@ choice = input("サーバーの種類を選択してください (1 or 2): ")
 ip = input("サーバーのIPアドレスを入力してください: ")
 port_input = input("ポート番号を入力してください（未入力なら自動で設定）: ")
 
+# デフォルトポート設定
+if choice == "1":
+    port = int(port_input) if port_input else 25565
+else:
+    port = int(port_input) if port_input else 19132
+
+# ホスト解決チェック
 try:
-    # ホスト名解決を試す（存在しないドメインのときエラーになる）
     socket.gethostbyname(ip)
 except socket.gaierror:
     print("\n❌ サーバーが見つかりません（IPまたはドメイン名が無効です）")
     exit()
 
+# ポート接続確認（ホワイトリストでも稼働判定）
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM if choice=="1" else socket.SOCK_DGRAM)
+sock.settimeout(3)
 try:
-    if choice == "1":
-        # --- Java版 ---
-        port = int(port_input) if port_input else 25565
-        server = JavaServer.lookup(f"{ip}:{port}")
-        status = server.status()
-        print("\n🎮 サーバー状態: オンライン")
-        print(f"バージョン: {status.version.name}")
-        print(f"プレイヤー数: {status.players.online} / {status.players.max}")
-        print(f"MOTD: {status.description or '(なし)'}")
-
-    elif choice == "2":
-        # --- 統合版 (Bedrock) ---
-        port = int(port_input) if port_input else 19132
-        server = BedrockServer.lookup(f"{ip}:{port}")
-        status = server.status()
-        print("\n🎮 サーバー状態: オンライン")
-        print(f"バージョン: {status.version.version}")
-        print(f"プレイヤー数: {status.players.online} / {status.players.max}")
-        print(f"MOTD: {status.motd}")
-
-    else:
-        print("❌ 無効な選択です。1 か 2 を入力してください。")
-
-except (ConnectionRefusedError, TimeoutError):
-    print("\n⚠️ サーバーはオフラインです。")
-except socket.timeout:
-    print("\n⏳ サーバーに接続がタイムアウトしました。オフラインの可能性があります。")
-except Exception as e:
-    print("\n⚠️ サーバーに接続できませんでした。")
-    print(f"詳細: {type(e).__name__}: {e}")
+    sock.connect((ip, port))
+    print("\n🎮 サーバーはオンラインです！（ホワイトリストの有無は不明）")
+except Exception:
+    print("\n⚠️ サーバーはオフラインか、ポートに接続できません")
+finally:
+    sock.close()

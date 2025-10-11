@@ -1,5 +1,6 @@
 from mcstatus import JavaServer, BedrockServer
 import socket
+import re
 
 def get_server_info():
     while True:
@@ -15,7 +16,6 @@ def get_server_info():
         ip = input("サーバーのIPアドレスを入力してください: ")
         port_input = input("ポート番号を入力してください（未入力なら自動で設定）: ")
 
-        # デフォルトポート設定
         port = int(port_input) if port_input else (25565 if choice=="1" else 19132)
 
         # ホスト解決チェック
@@ -35,17 +35,19 @@ def get_server_info():
                 if status.players.sample:
                     names = ", ".join([p.name for p in status.players.sample])
                     print(f"オンラインプレイヤー例: {names}")
-                print(f"MOTD: {status.description or '(なし)'}")
+                motd_text = re.sub(r"§.", "", status.description or "")
+                print(f"MOTD: {motd_text or '(なし)'}")
 
             else:
                 server = BedrockServer.lookup(f"{ip}:{port}")
                 status = server.status()
                 print("\n🎮 サーバー状態: オンライン")
-                print(f"バージョン: {status.version.version}")
+                print(f"バージョン: {status.version.name}")
                 print(f"プレイヤー数: {status.players.online} / {status.players.max}")
-                print(f"MOTD: {status.motd}")
+                motd_text = re.sub(r"§.", "", status.motd.raw or "")
+                print(f"MOTD: {motd_text or '(なし)'}")
 
-            break  # 正常に取得できたらループ終了
+            break  # 正常取得でループ終了
 
         except (ConnectionRefusedError, TimeoutError, socket.timeout):
             print("⚠️ サーバーはオフラインまたは応答がありません。最初からやり直します。")
